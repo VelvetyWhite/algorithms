@@ -1,10 +1,11 @@
 #include <random>
 #include <iostream>
+#include <chrono>
 
 #include "mergeSort.hpp"
 #include "quickSort.hpp"
 
-#define VEC_SIZE 15
+#define VEC_SIZE 1000000
 
 template<class T>
 std::ostream& operator << (std::ostream& os, const std::vector<T>& v)
@@ -31,21 +32,49 @@ int main()
     }
     std::vector<int> testVec = randVec;
 
-    std::cout << testVec << "\n";
+//    std::cout << testVec << "\n";
+    auto t1 = std::chrono::high_resolution_clock::now();
     MergeSort(testVec, 0, testVec.size() - 1);
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto t = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
+    std::cout << "MergeSort duration: " << t << "\n";
+
+#ifdef PRINT_SORTED
     std::cout << "After MergeSort: \n" << testVec << "\n";
-
+#endif
+/*
     testVec = randVec;
+    t1 = std::chrono::high_resolution_clock::now();
     MergeSortIter(testVec);
+    t2 = std::chrono::high_resolution_clock::now();
+    t = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
+    std::cout << "Iterative MergeSort duration: " << t << "\n";
+
+#ifdef PRINT_SORTED
     std::cout << "After MergeSortIter: \n" << testVec << "\n";
-
+#endif
+*/
     testVec = randVec;
+    t1 = std::chrono::high_resolution_clock::now();
     QuickSort(testVec, 0, testVec.size() - 1);
+    t2 = std::chrono::high_resolution_clock::now();
+    t = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
+    std::cout << "QuickSort duration: " << t << "\n";
+
+#ifdef PRINT_SORTED
     std::cout << "After QuickSort: \n" << testVec << "\n";
+#endif
 
     testVec = randVec;
+    t1 = std::chrono::high_resolution_clock::now();
     QuickSortIter(testVec, 0, testVec.size() - 1);
+    t2 = std::chrono::high_resolution_clock::now();
+    t = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
+    std::cout << "Iterative QuickSort duration: " << t << "\n";
+
+#ifdef PRINT_SORTED
     std::cout << "After QuickSortIter: \n" << testVec << "\n";
+#endif
 
     return 0;
 }
