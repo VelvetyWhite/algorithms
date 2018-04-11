@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "mergeSort.hpp"
+#include "quickSort.hpp"
 
 #define VEC_SIZE 15
 
@@ -37,6 +38,10 @@ int main()
     testVec = randVec;
     MergeSortIter(testVec);
     std::cout << "After MergeSortIter: \n" << testVec << "\n";
+
+    testVec = randVec;
+    QuickSort(testVec, 0, testVec.size() - 1);
+    std::cout << "After QuickSort: \n" << testVec << "\n";
 
     return 0;
 }
