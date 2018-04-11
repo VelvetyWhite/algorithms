@@ -54,10 +54,10 @@ static void Merge(std::vector<int>& v, int leftIndex, int middleIndex, int right
 
 void MergeSort(std::vector<int>& v, int leftIndex, int rightIndex)
 {
-    if((leftIndex < rightIndex) && (rightIndex <= v.size()))
+    if((leftIndex < rightIndex) && (rightIndex < v.size()))
     {
         //avoid overflow of (leftIndex + rightIndex) / 2 for large index values
-        int middleIndex = leftIndex + (rightIndex - leftIndex) / 2;
+        int middleIndex = leftIndex + ((rightIndex - leftIndex) / 2);
         MergeSort(v, leftIndex, middleIndex);
         MergeSort(v, middleIndex + 1, rightIndex);
 
@@ -67,13 +67,13 @@ void MergeSort(std::vector<int>& v, int leftIndex, int rightIndex)
 
 void MergeSortIter(std::vector<int>& v)
 {
-    for(int currentSize = 1; currentSize <= v.size() - 1; currentSize *= 2)
+    for(int currentSize = 1; currentSize < v.size(); currentSize *= 2)
     {
-        for(int leftStart = 0; leftStart < v.size() - 1; leftStart += 2 * currentSize)
+        for(int leftStart = 0; leftStart + currentSize < v.size(); leftStart += 2 * currentSize)
         {
             //ending point of left subarray
             int mid = leftStart + currentSize - 1;
-            int rightEnd = std::min((leftStart + 2 * currentSize - 1), int(v.size() - 1));
+            int rightEnd = std::min((leftStart + 2 * currentSize - 1), (int(v.size()) - 1));
 
             Merge(v, leftStart, mid, rightEnd);
         }

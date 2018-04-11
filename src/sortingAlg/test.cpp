@@ -42,7 +42,7 @@ int main()
 #ifdef PRINT_SORTED
     std::cout << "After MergeSort: \n" << testVec << "\n";
 #endif
-/*
+
     testVec = randVec;
     t1 = std::chrono::high_resolution_clock::now();
     MergeSortIter(testVec);
@@ -53,7 +53,7 @@ int main()
 #ifdef PRINT_SORTED
     std::cout << "After MergeSortIter: \n" << testVec << "\n";
 #endif
-*/
+
     testVec = randVec;
     t1 = std::chrono::high_resolution_clock::now();
     QuickSort(testVec, 0, testVec.size() - 1);
