@@ -43,5 +43,9 @@ int main()
     QuickSort(testVec, 0, testVec.size() - 1);
     std::cout << "After QuickSort: \n" << testVec << "\n";
 
+    testVec = randVec;
+    QuickSortIter(testVec, 0, testVec.size() - 1);
+    std::cout << "After QuickSortIter: \n" << testVec << "\n";
+
     return 0;
 }

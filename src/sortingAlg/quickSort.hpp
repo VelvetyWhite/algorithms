@@ -2,6 +2,7 @@
 #define _QUICK_SORT_
 
 #include <vector>
+#include <stack>
 #include <utility>
 
 static int Partition(std::vector<int>& v, int startIndex, int endIndex)
@@ -31,6 +32,35 @@ void QuickSort(std::vector<int>& v, int startIndex, int endIndex)
         //sort before and after partition
         QuickSort(v, startIndex, partitionIndex - 1);
         QuickSort(v, partitionIndex + 1, endIndex);
+    }
+}
+
+void QuickSortIter(std::vector<int>& v, int startIndex, int endIndex)
+{
+    std::stack<int> auxStack;
+    
+    auxStack.push(startIndex);
+    auxStack.push(endIndex);
+
+    while(!auxStack.empty())
+    {
+        endIndex = auxStack.top();
+        auxStack.pop();
+        startIndex = auxStack.top();
+        auxStack.pop();
+
+        int partitionIndex = Partition(v, startIndex, endIndex);
+
+        if(partitionIndex - 1 > startIndex)
+        {
+            auxStack.push(startIndex);
+            auxStack.push(partitionIndex - 1);
+        }
+        if(partitionIndex + 1 < endIndex)
+        {
+            auxStack.push(partitionIndex + 1);
+            auxStack.push(endIndex);
+        }
     }
 }
 
