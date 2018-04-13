@@ -6,6 +6,8 @@
 #include "quickSort.hpp"
 #include "insertionSort.hpp"
 #include "selectionSort.hpp"
+#include "naiveSort.hpp"
+#include "bubbleSort.hpp"
 
 #define VEC_SIZE 10000
 
@@ -89,7 +91,7 @@ int main()
     std::cout << "After InsertionSort: \n" << testVec << "\n";
 #endif
 
-     testVec = randVec;
+    testVec = randVec;
     t1 = std::chrono::high_resolution_clock::now();
     SelectionSort(testVec);
     t2 = std::chrono::high_resolution_clock::now();
@@ -98,6 +100,29 @@ int main()
 
 #ifdef PRINT_SORTED
     std::cout << "After SelectionSort: \n" << testVec << "\n";
+#endif
+
+    testVec = randVec;
+    t1 = std::chrono::high_resolution_clock::now();
+    BubbleSort(testVec);
+    t2 = std::chrono::high_resolution_clock::now();
+    t = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
+    std::cout << "BubbleSort duration: " << t << "\n";
+
+#ifdef PRINT_SORTED
+    std::cout << "After BubbleSort: \n" << testVec << "\n";
+#endif
+
+
+    testVec = randVec;
+    t1 = std::chrono::high_resolution_clock::now();
+    NaiveSort(testVec);
+    t2 = std::chrono::high_resolution_clock::now();
+    t = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
+    std::cout << "NaiveSort duration: " << t << "\n";
+
+#ifdef PRINT_SORTED
+    std::cout << "After NaiveSort: \n" << testVec << "\n";
 #endif
 
 
