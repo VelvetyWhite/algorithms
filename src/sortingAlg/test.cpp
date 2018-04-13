@@ -4,8 +4,10 @@
 
 #include "mergeSort.hpp"
 #include "quickSort.hpp"
+#include "insertionSort.hpp"
+#include "selectionSort.hpp"
 
-#define VEC_SIZE 1000000
+#define VEC_SIZE 10000
 
 template<class T>
 std::ostream& operator << (std::ostream& os, const std::vector<T>& v)
@@ -75,6 +77,29 @@ int main()
 #ifdef PRINT_SORTED
     std::cout << "After QuickSortIter: \n" << testVec << "\n";
 #endif
+
+    testVec = randVec;
+    t1 = std::chrono::high_resolution_clock::now();
+    InsertionSort(testVec);
+    t2 = std::chrono::high_resolution_clock::now();
+    t = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
+    std::cout << "InsertionSort duration: " << t << "\n";
+
+#ifdef PRINT_SORTED
+    std::cout << "After InsertionSort: \n" << testVec << "\n";
+#endif
+
+     testVec = randVec;
+    t1 = std::chrono::high_resolution_clock::now();
+    SelectionSort(testVec);
+    t2 = std::chrono::high_resolution_clock::now();
+    t = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
+    std::cout << "SelectionSort duration: " << t << "\n";
+
+#ifdef PRINT_SORTED
+    std::cout << "After SelectionSort: \n" << testVec << "\n";
+#endif
+
 
     return 0;
 }
